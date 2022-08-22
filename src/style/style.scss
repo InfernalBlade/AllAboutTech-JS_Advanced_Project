@@ -1,0 +1,120 @@
+@import "./mobile.scss";
+$bg: #06283D;
+$font: "Poppins", "sans-serif";
+*{
+    font-family: $font;
+    margin:0;
+    padding: 0;
+}
+
+hr{
+    width: 80%;
+}
+
+body{
+    overflow-x: hidden;
+    background-color: $bg;
+    header{
+        box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
+    }
+    .navbar{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #00416A;
+        height: 10vh;
+        width: 100%;
+            p{
+                font-size: 2.3rem;
+                color: white;
+            }
+        }   
+    }
+
+
+section.mainContainer{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    .topSec{
+        h1{
+            font-weight: lighter;
+            color: white;
+        }
+        margin-bottom: 50px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+
+.postContainer{
+    hr{
+        margin-block: 25px;
+        width: 80%;
+    }
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-block: 50px;
+}
+
+.post{
+    margin-top: 100px;
+    width:70vw;
+    display: flex;
+
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    .score{
+        width: 10%;
+        font-size: 18px;
+        color: #47B5FF;
+        font-weight: bold;
+        margin-right: 100px;
+    }
+    .title-row{
+        width: 70%;
+        margin-right: 300px;
+        a{
+            color: white;
+        }
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+    }
+    .title{
+        font-size: 20px;
+        color: #DEF6FF;
+        font-weight: lighter;
+    }
+    .user, .date{
+        width: 20%;
+        margin-right: 50px;
+        font-size: 18px;
+        color: #DEF6FF;
+    }
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-left:180px;
+    button{
+        margin-bottom: 50px;
+        text-align: center;
+        height: 5vh;
+        width: 10%;
+        font-size: 1rem;
+        font-weight: bold;
+        background-color: #000000;
+        border: none;
+        color: white;
+    }
+}
