@@ -2,42 +2,42 @@ import ".././style/style.scss";
 import { addPost } from "./createPost.js";
 import { timeConverter } from "./unixTimeConverter.js";
 
-let btn = document.querySelector(".loadmore");
-let spinnerContainer = document.querySelector(".spinner-container");
+const LOAD_MORE_BTN = document.querySelector(".loadmore");
+const SPINNER_CONTAINER = document.querySelector(".spinner-container");
 
-let urlNewStories = "https://hacker-news.firebaseio.com/v0/newstories.json";
-let idNumbers = 0;
+const API_URL = "https://hacker-news.firebaseio.com/v0/newstories.json";
+let counterId = 0;
 
 async function getNewStories(url) {
     let spinner = `<div class="spinner"></div>`;
-    spinnerContainer.innerHTML=spinner;
+    SPINNER_CONTAINER.innerHTML=spinner;
     try {
-        const idResponse = await axios.get(url)
-        spinnerContainer.innerHTML="";
+        const ID_LIST_RESPONSE = await axios.get(url)
+        SPINNER_CONTAINER.innerHTML="";
 
         for(let i = 0; i<10; i++){
-            let id = idResponse.data[idNumbers];
-            
-            let storieUrl = `https://hacker-news.firebaseio.com/v0/item/${id}.json`;
+            let storyId = ID_LIST_RESPONSE.data[counterId];
+
+            let storyUrl = `https://hacker-news.firebaseio.com/v0/item/${storyId}.json`;
             try{
-                const response2 = await axios.get(storieUrl);
-                let unixTime = response2.data.time;
-                addPost(response2.data.score, response2.data.title, response2.data.url, response2.data.by, timeConverter(unixTime));
-                idNumbers++;
+                const STORY_RESPONSE = await axios.get(storyUrl);
+                let unixTime = STORY_RESPONSE.data.time;
+                addPost(STORY_RESPONSE.data.score, STORY_RESPONSE.data.title, STORY_RESPONSE.data.url, STORY_RESPONSE.data.by, timeConverter(unixTime));
+                counterId++;
             }
             catch(err){
-                console.log("err");
+                console.log(err);
             }
         }
    } catch(err) {
-        console.log('err')
+        console.log(err)
    }
    
 }
 
-getNewStories(urlNewStories);
+getNewStories(API_URL);
 
-btn.addEventListener("click", ()=>{
-    getNewStories(urlNewStories);
+LOAD_MORE_BTN.addEventListener("click", ()=>{
+    getNewStories(API_URL);
 })
 

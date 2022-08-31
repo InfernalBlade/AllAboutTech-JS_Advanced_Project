@@ -1,55 +1,53 @@
 let mainContainer = document.querySelector(".postContainer");
 
+function createElement(type, className, text, innerHTML, attributeType, attribute){
+    try{
+        const ELEMENT = document.createElement(type);
+        
+        if(className!=undefined) ELEMENT.className = className;
+        if(text!=undefined) ELEMENT.textContent = text;
+        if(innerHTML!=undefined) ELEMENT.innerHTML = (innerHTML);
+        if(attribute!=undefined) ELEMENT.setAttribute(attributeType, attribute);
+
+        return ELEMENT;
+    }
+    catch (e){
+        console.log(e);
+    }
+}
+
 export function addPost(score,title,url,user,date){
-    /* Creating elements in DOM */
-    let post = document.createElement("div");
-    let scoreContainer = document.createElement("p");
-    let titleContainer = document.createElement("h3");
-    let urlContainer = document.createElement("a");
-    let dateContainer = document.createElement("p");
-    let userContainer = document.createElement("p");
+    const POST = createElement("div", "post");
+    const TITLE_CONTAINER = createElement("h3", "title", title);
+    const URL_CONTAINER = createElement("a", "link", null, "Go to full article &rarr;", "href", url);
+    URL_CONTAINER.setAttribute("target", "_blank");
+    URL_CONTAINER.setAttribute("rel", "noopener");
+    const SCORE_CONTAINER = createElement("p", "score", "Likes: " + score);
+    const DATE_CONTAINER = createElement("p", "date", date);
+    const USER_CONTAINER = createElement("p", "user", "by: " + user)
 
-    let title_row = document.createElement("div");
+    const TITLE_ROW = createElement("div", "title-row");
 
-    let line = document.createElement("hr"); 
-
-    /* Assigning class to elements */
-    post.classList.add("post");
-    scoreContainer.classList.add("score");
-    titleContainer.classList.add("title");
-    urlContainer.classList.add("link");
-    userContainer.classList.add("user");
-    dateContainer.classList.add("date");
-
-    title_row.classList.add("title-row");
-
-    title_row.append(
-        titleContainer,
-        urlContainer
-        );
+    const line = document.createElement("hr");
 
     /* Appending elements to DOM */
-    post.append(
-        scoreContainer,
-        title_row,
-        userContainer,
-        dateContainer,
+    TITLE_ROW.append(
+        TITLE_CONTAINER,
+        URL_CONTAINER
+        );
+
+    POST.append(
+        SCORE_CONTAINER,
+        TITLE_ROW,
+        USER_CONTAINER,
+        DATE_CONTAINER,
     );
     
-
-    /* Show data from API */
-    scoreContainer.innerText=("Likes: " + score);
-    titleContainer.innerText=(title);
-    urlContainer.innerHTML=("Go to full article &rarr;");
-    urlContainer.setAttribute("href", url);
-    userContainer.innerText=("by " + user);
-    dateContainer.innerText=(date);
-
     /* Url undefined handling */
     if(url==null){
-        urlContainer.innerText=("Link not available");
-        urlContainer.removeAttribute("href");
+        URL_CONTAINER.textContent=("Link not available");
+        URL_CONTAINER.removeAttribute("href");
     }
 
-    mainContainer.append(post, line);
+    mainContainer.append(POST, line);
 };
